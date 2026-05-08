@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talib-ul-Mola Academy | Digital Library</title>
+    <meta name="description" content="Talib-ul-Mola Academy Digital Library - Preserving rare regional literature, manuscripts, and books in digital form">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/555dfe40341db3b52f4b7bafc3bb2432?family=MB+Sindhi+Web" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --green-dark: #1a1a2e;
+            --green-main: #16213e;
+            --green-mid: #0f3460;
+            --green-light: #e8f0fe;
+            --gold: #8b6914;
+            --gold-light: #c9a227;
+            --gold-bg: #fdf6e3;
+            --cream: #f8f6f0;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --spiritual-deep: #1a1a2e;
+            --spiritual-blue: #0f3460;
+            --spiritual-teal: #1b4965;
+            --spiritual-accent: #c9a227;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--cream); color: var(--gray-800); line-height: 1.6; }
+        .font-heading { font-family: 'Playfair Display', Georgia, serif; }
+        .font-urdu { font-family: 'Noto Nastaliq Urdu', serif; direction: rtl; }
+        .font-sindhi { font-family: 'MB Sindhi Web', 'Noto Nastaliq Urdu', serif; direction: rtl; }
+
+        /* Header */
+        .header { background: linear-gradient(90deg, var(--spiritual-deep), var(--spiritual-blue)); color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+        .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-light), #e6c84b); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 12px rgba(201,162,39,0.3); }
+        .logo-text h1 { font-size: 16px; font-weight: 700; line-height: 1.2; }
+        .logo-text p { font-size: 11px; color: #a8c4e0; }
+        .nav { display: flex; gap: 24px; list-style: none; }
+        .nav a { color: white; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav a:hover { color: var(--gold-light); }
+        .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .mobile-nav { display: none; background: var(--spiritual-deep); padding: 16px 20px; }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #0f3460 60%, #1b4965 100%); color: white; position: relative; overflow: hidden; }
+        .hero::before { content: '✦'; position: absolute; top: 40px; right: 60px; font-size: 120px; opacity: 0.04; color: var(--gold-light); }
+        .hero::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px; border: 1px solid rgba(201,162,39,0.1); border-radius: 50%; }
+        .hero-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 80%, rgba(201,162,39,0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(15,52,96,0.3) 0%, transparent 50%); }
+        .hero-inner { max-width: 1200px; margin: 0 auto; padding: 80px 20px; text-align: center; position: relative; z-index: 1; }
+        .hero-badge { display: inline-block; padding: 6px 16px; background: rgba(201,162,39,0.15); border: 1px solid rgba(201,162,39,0.3); border-radius: 20px; font-size: 13px; color: var(--gold-light); margin-bottom: 24px; }
+        .hero h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .hero h2 span { color: var(--gold-light); }
+        .hero p { font-size: 18px; color: #a8c4e0; max-width: 650px; margin: 0 auto 32px; }
+        .hero-urdu { font-family: 'Noto Nastaliq Urdu', serif; font-size: 22px; color: var(--gold-light); margin-bottom: 16px; direction: rtl; opacity: 0.9; }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { padding: 14px 32px; background: linear-gradient(135deg, var(--gold-light), #e6c84b); color: var(--spiritual-deep); font-weight: 700; border-radius: 8px; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-size: 15px; box-shadow: 0 4px 15px rgba(201,162,39,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,162,39,0.4); }
+        .btn-outline { padding: 14px 32px; border: 2px solid rgba(201,162,39,0.4); color: var(--gold-light); border-radius: 8px; text-decoration: none; transition: all 0.2s; font-size: 15px; }
+        .btn-outline:hover { background: rgba(201,162,39,0.1); border-color: var(--gold-light); }
+
+        /* Stats */
+        .stats { background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .stats-inner { max-width: 900px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: var(--spiritual-blue); }
+        .stat-label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
+
+        /* Features */
+        .features { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .section-title { text-align: center; margin-bottom: 48px; }
+        .section-title h2 { font-size: 30px; font-weight: 700; color: var(--spiritual-deep); }
+        .section-title p { color: var(--gray-500); margin-top: 8px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .feature-card { background: white; padding: 28px; border-radius: 12px; border: 1px solid var(--gray-100); transition: box-shadow 0.2s; }
+        .feature-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .feature-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--green-light), var(--gold-bg)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+        .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--gray-600); }
+
+        /* Library Section */
+        .library { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
+        .filters { background: white; padding: 16px; border-radius: 12px; border: 1px solid var(--gray-100); margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .search-input { flex: 1; min-width: 200px; padding: 10px 16px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; outline: none; }
+        .search-input:focus { border-color: var(--spiritual-blue); box-shadow: 0 0 0 3px rgba(15,52,96,0.1); }
+        .filter-select { padding: 10px 16px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; outline: none; background: white; }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .book-card { background: white; border-radius: 12px; border: 1px solid var(--gray-100); overflow: hidden; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; }
+        .book-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .book-cover { height: 160px; background: linear-gradient(135deg, #e8f0fe, var(--gold-bg)); display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .book-info { padding: 16px; }
+        .book-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .book-info .author { font-size: 12px; color: var(--gray-500); margin-bottom: 8px; }
+        .book-meta { display: flex; justify-content: space-between; align-items: center; }
+        .book-category { font-size: 11px; padding: 3px 8px; background: var(--green-light); color: var(--spiritual-blue); border-radius: 12px; }
+        .book-lang { font-size: 11px; color: var(--gray-400); }
+        .read-link { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--spiritual-blue); font-weight: 600; margin-top: 10px; }
+
+        /* Reader */
+        .reader-page { display: none; }
+        .reader-page.active { display: block; }
+        .reader-toolbar { background: white; border-bottom: 1px solid var(--gray-200); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 56px; z-index: 50; }
+        .reader-controls { display: flex; align-items: center; gap: 8px; }
+        .reader-btn { padding: 8px; border: none; background: none; cursor: pointer; border-radius: 8px; transition: background 0.2s; font-size: 16px; }
+        .reader-btn:hover { background: var(--gray-100); }
+        .reader-btn.active { background: var(--gold-bg); color: var(--gold); }
+        .reader-btn.bookmarked { background: var(--green-light); color: var(--spiritual-blue); }
+        .font-size-display { font-size: 12px; color: var(--gray-500); width: 30px; text-align: center; }
+        .reader-info { background: rgba(15,52,96,0.05); padding: 12px 20px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
+        .reader-info h3 { font-weight: 700; color: var(--spiritual-blue); font-size: 15px; }
+        .reader-info .meta { font-size: 12px; color: var(--gray-500); }
+        .reader-content { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .reader-paper { background: white; border-radius: 12px; border: 1px solid var(--gray-200); padding: 40px; min-height: 50vh; line-height: 1.9; color: var(--gray-700); }
+        .reader-paper.highlight-mode ::selection { background: #fde68a; }
+        .page-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+        .page-btn { padding: 10px 20px; background: white; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+        .page-btn:hover { background: var(--gray-50); }
+        .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .progress-bar { margin-top: 16px; }
+        .progress-bar .labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-400); margin-bottom: 4px; }
+        .progress-track { height: 6px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--spiritual-blue), var(--gold-light)); border-radius: 3px; transition: width 0.3s; }
+        .bookmark-msg { margin-top: 16px; padding: 12px; background: var(--green-light); border: 1px solid #a8c4e0; border-radius: 8px; font-size: 13px; color: var(--spiritual-blue); }
+
+        /* About */
+        .about { background: white; }
+        .about-inner { max-width: 700px; margin: 0 auto; padding: 80px 20px; text-align: center; }
+        .about-inner h2 { font-size: 30px; font-weight: 700; color: var(--spiritual-deep); margin-bottom: 20px; }
+        .about-inner p { font-size: 16px; color: var(--gray-600); line-height: 1.8; }
+        .about-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; color: var(--spiritual-blue); font-weight: 500; font-size: 14px; }
+
+        /* Footer */
+        .footer { background: linear-gradient(135deg, #0a0a1a, var(--spiritual-deep)); color: white; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+        .footer h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+        .footer h4 { font-size: 14px; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; }
+        .footer p, .footer a { font-size: 13px; color: #a8c4e0; text-decoration: none; line-height: 1.8; }
+        .footer a:hover { color: var(--gold-light); }
+        .footer-bottom { border-top: 1px solid rgba(201,162,39,0.15); text-align: center; padding: 16px 20px; font-size: 12px; color: #a8c4e0; }
+
+        /* Pages visibility */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .mobile-toggle { display: block; }
+            .stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .hero-inner { padding: 50px 20px; }
+            .reader-paper { padding: 20px; }
+            .filters { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">�</div>
+                <div class="logo-text">
+                    <h1 class="font-heading">Talib-ul-Mola Academy</h1>
+                    <p>Knowledge • Spirituality • Poetry</p>
+                </div>
+            </a>
+            <ul class="nav">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('library')">Library</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-toggle" onclick="toggleMobile()" aria-label="Menu">☰</button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="#" onclick="showPage('home'); toggleMobile()">Home</a>
+            <a href="#" onclick="showPage('library'); toggleMobile()">Library</a>
+            <a href="#about" onclick="toggleMobile()">About</a>
+            <a href="#contact" onclick="toggleMobile()">Contact</a>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page active">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-pattern"></div>
+            <div class="hero-inner">
+                <div class="hero-badge">� Spiritual Wisdom • Poetry • Education</div>
+                <h2 class="font-heading">Talib-ul-Mola Academy<br><span>Digital Library</span></h2>
+                <p>Honoring the legacy of Makhdoom Muhammad Zaman Talib-ul-Mola — politician, scholar, poet, and 17th Sajjadah Nasheen of Sarwari Jammat, Hala. Explore rare literature, manuscripts, and poetry digitized for future generations.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary" onclick="showPage('library')">Browse Library</a>
+                    <a href="#about" class="btn-outline">About the Legacy</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stats-inner">
+                <div><div class="stat-value">30+</div><div class="stat-label">Published Books</div></div>
+                <div><div class="stat-value">4+</div><div class="stat-label">Languages</div></div>
+                <div><div class="stat-value">100%</div><div class="stat-label">Free Access</div></div>
+                <div><div class="stat-value">24/7</div><div class="stat-label">Available Online</div></div>
+            </div>
+        </section>
+
+        <!-- Mission -->
+        <section style="max-width:1000px;margin:0 auto;padding:60px 20px;">
+            <div style="background:linear-gradient(135deg, #1a1a2e, #0f3460);border-radius:20px;padding:40px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:center;">
+                <img src="src/data/poster.jpeg" alt="Talib-ul-Mola Academy - Founded by Makhdoom Muhammad Zaman Talib-ul-Mola" style="width:340px;max-width:100%;border-radius:12px;border:3px solid var(--gold-light);box-shadow:0 6px 25px rgba(0,0,0,0.3);">
+                <div style="flex:1;min-width:280px;color:white;">
+                    <p class="font-sindhi" style="font-size:26px;color:var(--gold-light);margin-bottom:12px;direction:rtl;">مخدوم محمد زمان طالب المولا</p>
+                    <p style="font-size:14px;color:#a8c4e0;line-height:1.9;margin-bottom:16px;">
+                        Makhdoom Muhammad Zaman Talib-ul-Mola (4 October 1919 – 11 January 1993) was a distinguished Pakistani politician, scholar, and Sindhi poet. He served as the 17th Sajjadah Nasheen of Ghous-ul-Haq Makhdoom Sarwar Nooh Shrine, known as "Sarwari Jammat" in Hala. He was Senior Vice Chairman of Pakistan Peoples Party, Chairman of Sindhi Adabi Board, and authored over 30 books of poetry and prose.
+                    </p>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <span style="padding:5px 12px;background:rgba(201,162,39,0.2);border:1px solid rgba(201,162,39,0.4);border-radius:16px;font-size:11px;color:var(--gold-light);">🏅 Hilal-e-Imtiaz</span>
+                        <span style="padding:5px 12px;background:rgba(201,162,39,0.2);border:1px solid rgba(201,162,39,0.4);border-radius:16px;font-size:11px;color:var(--gold-light);">🏅 Tamgha-e-Pakistan</span>
+                        <span style="padding:5px 12px;background:rgba(201,162,39,0.2);border:1px solid rgba(201,162,39,0.4);border-radius:16px;font-size:11px;color:var(--gold-light);">🏅 Latif Award</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="section-title">
+                <h2 class="font-heading">Platform Features</h2>
+                <p>A modern reading experience built for scholars, seekers, and students of knowledge</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">�</div>
+                    <h3>Full-Text Search</h3>
+                    <p>OCR-powered searchable content across all digitized books, poetry collections, and manuscripts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">�</div>
+                    <h3>Bookmark & Highlight</h3>
+                    <p>Save your place, highlight spiritual passages, and resume reading anytime.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Read comfortably on any device — access wisdom anywhere, anytime.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Backed Up</h3>
+                    <p>Enterprise-grade security ensuring these precious texts are preserved safely.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Multilingual Support</h3>
+                    <p>Access content in Urdu, Sindhi, Arabic, Persian, and English.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎧</div>
+                    <h3>Future AI Audio</h3>
+                    <p>Upcoming auto-reading and audiobook features — hear poetry and prose in multiple languages.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="about" id="about">
+            <div class="about-inner">
+                <h2 class="font-heading">About Makhdoom Talib-ul-Mola</h2>
+                <p style="font-size:18px;color:var(--gold);margin-bottom:16px;font-style:italic;">(4 October 1919 – 11 January 1993)</p>
+                <p>Makhdoom Muhammad Zaman Talib-ul-Mola was a Pakistani politician, scholar, and celebrated Sindhi poet. As the 17th Sajjadah Nasheen of Ghous-ul-Haq Makhdoom Sarwar Nooh Shrine — famously known as "Sarwari Jammat" in Hala — he became Sajjadah Nasheen after the death of his father Makhdoom Ghulam Muhammad. His shrine is famous as "No Lakhi Godri."</p>
+                <p style="margin-top:16px;">He was a founding member of Pakistan Peoples Party (PPP), which was founded in his house at Hala in 1967. He served as Senior Vice Chairman of PPP, was elected Member of the National Assembly multiple times, and played a key role in the MRD movement and anti-One Unit movement.</p>
+                <p style="margin-top:16px;">As Chairman of Sindhi Adabi Board, he authored more than 30 books of poetry and prose in Sindhi, Persian, Urdu, and Siraiki. He was awarded Hilal-e-Imtiaz, Tamgha-e-Pakistan, and Latif Award for his contributions. He is the father of Makhdoom Muhammad Amin Fahim and Makhdoom Saeeduz Zaman.</p>
+                <div class="about-badge">🕌 Sarwari Jammat • ✍️ 30+ Books • 🏛️ PPP Founding Member • 📚 Sindhi Adabi Board Chairman</div>
+                <p style="margin-top:24px;font-size:14px;color:var(--gray-500);border-top:1px solid var(--gray-200);padding-top:20px;">
+                    <strong>Current Chairman:</strong> Makhdoom Jameel Zaman (Member of National Assembly of Pakistan)
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- LIBRARY PAGE -->
+    <div id="page-library" class="page">
+        <section class="library">
+            <div class="section-title" style="text-align:left">
+                <h2 class="font-heading">Digital Library</h2>
+                <p>Browse our collection of spiritual texts, poetry, manuscripts, and scholarly works</p>
+            </div>
+            <div class="filters">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search books by title or author..." oninput="filterBooks()">
+                <select class="filter-select" id="categoryFilter" onchange="filterBooks()">
+                    <option value="All">All Categories</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Prose">Prose</option>
+                    <option value="Sufism">Sufism</option>
+                    <option value="Literature">Literature</option>
+                </select>
+                <select class="filter-select" id="languageFilter" onchange="filterBooks()">
+                    <option value="All">All Languages</option>
+                    <option value="Sindhi">Sindhi</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="Siraiki">Siraiki</option>
+                </select>
+            </div>
+            <p id="resultCount" style="font-size:13px;color:var(--gray-500);margin-bottom:16px;"></p>
+            <div class="books-grid" id="booksGrid"></div>
+        </section>
+    </div>
+
+    <!-- READER PAGE -->
+    <div id="page-reader" class="page">
+        <div class="reader-toolbar">
+            <a href="#" onclick="showPage('library')" style="color:var(--gray-600);text-decoration:none;font-size:14px;">← Back to Library</a>
+            <div class="reader-controls">
+                <button class="reader-btn" onclick="changeFontSize(-2)" title="Decrease font">A-</button>
+                <span class="font-size-display" id="fontSizeDisplay">16</span>
+                <button class="reader-btn" onclick="changeFontSize(2)" title="Increase font">A+</button>
+                <span style="width:1px;height:24px;background:var(--gray-200);margin:0 4px;"></span>
+                <button class="reader-btn" id="highlightBtn" onclick="toggleHighlight()" title="Highlight mode">🖍️</button>
+                <button class="reader-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Bookmark">🔖</button>
+            </div>
+        </div>
+        <div class="reader-info">
+            <div>
+                <h3 id="readerTitle"></h3>
+                <span class="meta" id="readerMeta"></span>
+            </div>
+            <span class="meta" id="readerPageInfo"></span>
+        </div>
+        <div class="reader-content">
+            <div class="reader-paper" id="readerPaper">
+                <p id="readerText"></p>
+            </div>
+            <div class="page-nav">
+                <button class="page-btn" id="prevBtn" onclick="changePage(-1)">← Previous</button>
+                <span style="font-size:13px;color:var(--gray-500);" id="pageLabel"></span>
+                <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next →</button>
+            </div>
+            <div class="progress-bar">
+                <div class="labels"><span>Reading Progress</span><span id="progressPercent"></span></div>
+                <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+            <div class="bookmark-msg" id="bookmarkMsg" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-inner">
+            <div>
+                <h3>� Talib-ul-Mola Academy</h3>
+                <p>Carrying forward the legacy of Makhdoom Muhammad Zaman Talib-ul-Mola — preserving rare literature, poetry, and manuscripts from the Sarwari Jammat tradition for seekers of knowledge everywhere.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <a href="#" onclick="showPage('home')">Home</a><br>
+                <a href="#" onclick="showPage('library')">Browse Library</a><br>
+                <a href="#about">About the Legacy</a>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>📞 03042976289</p>
+                <p>✉️ tlmacademy@gmail.com</p>
+                <p>📍 Head Office: Talib-ul-Mola Academy, Hala, Matiari, Sindh, Pakistan</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2024 Talib-ul-Mola Academy. All rights reserved. | Dedicated to the pursuit of knowledge and spiritual enlightenment.</div>
+    </footer>
+
+    <script>
+
+        // Book Data - Actual published works of Makhdoom Muhammad Zaman Talib-ul-Mola
+        const books = [
+            { id: 1, title: 'Bahar-e-Talib', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 150, cover: '📗', year: '1946' },
+            { id: 2, title: 'Rubaiyat-e-Talib', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 120, cover: '📕', year: '1949' },
+            { id: 3, title: 'Khud Shanasi', author: 'Makhdoom Talib-ul-Mola', category: 'Prose', language: 'Sindhi', pages: 200, cover: '📘', year: '1949' },
+            { id: 4, title: 'Shaitaan', author: 'Makhdoom Talib-ul-Mola', category: 'Prose', language: 'Sindhi', pages: 180, cover: '📙', year: '1951' },
+            { id: 5, title: 'Islami Tasawwuf', author: 'Makhdoom Talib-ul-Mola', category: 'Sufism', language: 'Sindhi', pages: 220, cover: '📗', year: '1951' },
+            { id: 6, title: 'Kachkoal', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 280, cover: '📕', year: '1955' },
+            { id: 7, title: 'Shan-e-Serwari', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 160, cover: '📘', year: '1958' },
+            { id: 8, title: 'Kaafi', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 140, cover: '📙', year: '1962' },
+            { id: 9, title: 'Deewan-e-Talib-ul-Mola', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 350, cover: '📗', year: '1982' },
+            { id: 10, title: 'Mathanavi-e-Aql-o-Ishq', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 240, cover: '📕', year: '1983' },
+            { id: 11, title: 'Durr-e-Nayab urf Yaad-e-Raftagan', author: 'Makhdoom Talib-ul-Mola', category: 'Literature', language: 'Sindhi', pages: 300, cover: '📘', year: '1953' },
+            { id: 12, title: 'Aab-e-Hayaat', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 190, cover: '📙', year: '1991' },
+            { id: 13, title: 'Sham-o-Subah', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 170, cover: '📗', year: '1982' },
+            { id: 14, title: 'Be-Peer Ankhiyoon', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 130, cover: '📕', year: '1987' },
+            { id: 15, title: 'Sindh Jo Sanwann', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 200, cover: '📘', year: '1980' },
+            { id: 16, title: 'Chappar mein Charriyoon', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 160, cover: '📙', year: '1971' },
+            { id: 17, title: 'Muhunjo Nandhpann', author: 'Makhdoom Talib-ul-Mola', category: 'Prose', language: 'Sindhi', pages: 250, cover: '📗', year: '1993' },
+            { id: 18, title: 'Shan-e-Hussain', author: 'Makhdoom Talib-ul-Mola', category: 'Poetry', language: 'Sindhi', pages: 180, cover: '📕', year: '2004' },
+            { id: 19, title: 'Lughat-e-Sindhi Mukhaffifaat', author: 'Makhdoom Talib-ul-Mola', category: 'Literature', language: 'Sindhi', pages: 320, cover: '📘', year: '1991' },
+            { id: 20, title: 'Imam Ghazali ja Khutt', author: 'Makhdoom Talib-ul-Mola', category: 'Sufism', language: 'Sindhi', pages: 200, cover: '📙', year: '1953' },
+        ];
+
+        const sampleText = `بسم اللہ الرحمن الرحیم\n\nThis is a sample digitized page from the manuscript. In the full implementation, this content will be loaded from the OCR-processed text of the actual scanned book pages.\n\nThe digital library preserves the original formatting and structure of the manuscript while making the text fully searchable and accessible to scholars and readers worldwide.\n\nEach page is carefully scanned at high resolution and processed through advanced OCR technology to ensure accuracy of the digitized text. Scholars and researchers can search across the entire collection to find relevant passages and references.\n\nThe platform supports multiple scripts including Arabic, Persian, Sindhi, and Urdu nastaliq, ensuring faithful representation of the original manuscripts.\n\nThis preservation effort ensures that rare and fragile manuscripts are protected from physical deterioration while becoming accessible to a global audience of researchers, students, and enthusiasts of classical literature.`;
+
+        // State
+        let currentPage = 1;
+        let currentBook = null;
+        let fontSize = 16;
+        let isBookmarked = false;
+        let isHighlight = false;
+
+        // Navigation
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            if (page === 'library') renderBooks();
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobile() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Library
+        function renderBooks() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            const lang = document.getElementById('languageFilter').value;
+
+            const filtered = books.filter(b => {
+                const matchSearch = b.title.toLowerCase().includes(search) || b.author.toLowerCase().includes(search);
+                const matchCat = cat === 'All' || b.category === cat;
+                const matchLang = lang === 'All' || b.language === lang;
+                return matchSearch && matchCat && matchLang;
+            });
+
+            document.getElementById('resultCount').textContent = `Showing ${filtered.length} of ${books.length} books`;
+
+            const grid = document.getElementById('booksGrid');
+            grid.innerHTML = filtered.map(book => `
+                <a href="#" class="book-card" onclick="openReader(${book.id})">
+                    <div class="book-cover">${book.cover}</div>
+                    <div class="book-info">
+                        <h3>${book.title}</h3>
+                        <p class="author">${book.author}</p>
+                        <div class="book-meta">
+                            <span class="book-category">${book.category}</span>
+                            <span class="book-lang">${book.language}</span>
+                        </div>
+                        <div class="read-link">📖 Read Now</div>
+                    </div>
+                </a>
+            `).join('');
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--gray-400);">No books found matching your criteria.</div>';
+            }
+        }
+
+        function filterBooks() { renderBooks(); }
+
+        // Reader
+        function openReader(id) {
+            currentBook = books.find(b => b.id === id);
+            currentPage = 1;
+            fontSize = 16;
+            isBookmarked = false;
+            isHighlight = false;
+            updateReader();
+            showPage('reader');
+        }
+
+        function updateReader() {
+            document.getElementById('readerTitle').textContent = currentBook.title;
+            document.getElementById('readerMeta').textContent = `${currentBook.author} • ${currentBook.language}`;
+            document.getElementById('readerPageInfo').textContent = `Page ${currentPage} of ${currentBook.pages}`;
+            document.getElementById('readerText').textContent = sampleText;
+            document.getElementById('pageLabel').textContent = `Page ${currentPage}`;
+            document.getElementById('fontSizeDisplay').textContent = fontSize;
+            document.getElementById('readerPaper').style.fontSize = fontSize + 'px';
+
+            const pct = Math.round((currentPage / currentBook.pages) * 100);
+            document.getElementById('progressPercent').textContent = pct + '%';
+            document.getElementById('progressFill').style.width = pct + '%';
+
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === currentBook.pages;
+
+            document.getElementById('highlightBtn').className = 'reader-btn' + (isHighlight ? ' active' : '');
+            document.getElementById('bookmarkBtn').className = 'reader-btn' + (isBookmarked ? ' bookmarked' : '');
+            document.getElementById('readerPaper').className = 'reader-paper' + (isHighlight ? ' highlight-mode' : '');
+
+            const msg = document.getElementById('bookmarkMsg');
+            if (isBookmarked) {
+                msg.style.display = 'block';
+                msg.textContent = `✓ Page ${currentPage} bookmarked. You can resume reading from here next time.`;
+            } else {
+                msg.style.display = 'none';
+            }
+        }
+
+        function changePage(dir) {
+            currentPage = Math.max(1, Math.min(currentBook.pages, currentPage + dir));
+            isBookmarked = false;
+            updateReader();
+        }
+
+        function changeFontSize(dir) {
+            fontSize = Math.max(12, Math.min(28, fontSize + dir));
+            updateReader();
+        }
+
+        function toggleHighlight() {
+            isHighlight = !isHighlight;
+            updateReader();
+        }
+
+        function toggleBookmark() {
+            isBookmarked = !isBookmarked;
+            updateReader();
+        }
+    </script>
+</body>
+</html>
